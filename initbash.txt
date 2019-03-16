@@ -1,0 +1,114 @@
+## startup script
+chmod +x HANKexe/config.sh
+./config.sh
+
+#not needed sudo apt-get upgrade 
+#not needed  sudo apt-get install git
+#not needed  sudo apt-get update
+#not needed not needed sudo apt-get install wget
+#not needed sudo apt-get install apt-transport-https 
+#not needed sudo apt-get update
+
+
+git clone https://github.com/DavidCamposeco/HANKexe.git
+sudo apt-get update
+sudo apt-get install lsb g++ expect -y
+
+
+
+## GET LIBRARIES LICENSE
+wget https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS-2019.PUB
+sudo apt-key add GPG-PUB-KEY-INTEL-SW-PRODUCTS-2019.PUB
+
+## Intel® Math Kernel Library (Intel® MKL):
+sudo sh -c 'echo deb https://apt.repos.intel.com/mkl all main > /etc/apt/sources.list.d/intel-mkl.list'
+sudo apt-get update
+## Intel® Integrated Performance Primitives (Intel® IPP):
+sudo sh -c 'echo deb https://apt.repos.intel.com/ipp all main > /etc/apt/sources.list.d/intel-ipp.list'
+sudo apt-get update
+## Intel® MPI Library:
+sudo sh -c 'echo deb https://apt.repos.intel.com/mpi all main > /etc/apt/sources.list.d/intel-mpi.list'
+sudo apt-get update
+## GET THEM
+sudo apt-get install intel-mkl-2019.3-062 -y
+#prompt Y
+sudo apt-get install intel-ipp-2019.3-062 -y
+#prompt Y
+sudo apt-get install intel-mpi-2019.3-062 -y
+
+# RUN BASH for ENV variables
+cd /opt/intel/bin/
+source ./compilervars.sh intel64
+#source ./link_install.sh
+cd /opt/intel/compilers_and_libraries/linux/bin
+source ./compilervars.sh intel64
+cd /opt/intel/compilers_and_libraries_2019/linux/bin
+source ./compilervars.sh intel64
+cd /opt/intel/compilers_and_libraries_2019.3.199/linux/bin/
+source ./compilervars.sh intel64
+cd /opt/intel/parallel_studio_xe_2019.3.062
+source 	 ./psxevars.sh intel64
+cd /opt/intel/parallel_studio_xe_2019.3.062
+./psxevars.sh intel64
+cd /opt/intel/compilers_and_libraries_2019.3.199/bin
+source ./psxevars.sh intel64
+cd /opt/intel/compilers_and_libraries_2019.3.199/bin/
+./psxevars.sh intel64
+
+
+#########Installing Intel® Parallel Studio XE Runtime 2019 Using APT Repository
+##https://software.intel.com/en-us/articles/installing-intel-free-libs-and-python-apt-repo
+
+mkdir lic_rt
+cd lic_rt
+wget https://apt.repos.intel.com/2019/GPG-PUB-KEY-INTEL-PSXE-RUNTIME-2019 
+cd
+sudo apt-key add lic_rt/GPG-PUB-KEY-INTEL-PSXE-RUNTIME-2019 
+cd /etc/apt/sources.list.d
+sudo touch intel-psxe-runtime-2019.list
+sudo sh -c 'echo deb https://apt.repos.intel.com/2019 intel-psxe-runtime main > /etc/apt/sources.list.d/intel-psxe-runtime-2019.list'
+echo "deb https://apt.repos.intel.com/2019 intel-psxe-runtime main" | sudo tee -a /etc/apt/intel-psxe-runtime-2019.list
+sudo apt-get update
+sudo apt-get install intel-psxe-runtime=2019.3-199 -y
+
+###### RUN BASH for ENV variables
+cd /opt/intel/psxe_runtime/linux/bin
+ source ./psxevars.sh intel64
+ ./compilervars.sh intel64
+ source  ./compilervars.sh intel64
+cd /opt/intel/psxe_runtime_2019/linux/bin/
+ source ./psxevars.sh intel64
+ ./compilervars.sh intel64
+ source  ./compilervars.sh intel64
+cd /opt/intel/psxe_runtime_2019.3.199/linux/bin/
+ source ./psxevars.sh intel64
+ ./compilervars.sh intel64
+ source  ./compilervars.sh intel64
+
+# GET suitesparse
+sudo apt-get update
+sudo apt-get install libsuitesparse-dev -y
+
+ulimit -s unlimited
+cd
+cd HANKexe/
+./Main
+#########Installing Intel® Parallel Studio XE Runtime 2019 Using APT Repository
+##https://software.intel.com/en-us/articles/installing-intel-free-libs-and-python-apt-repo
+
+mkdir lic_rt
+cd lic_rt
+wget https://apt.repos.intel.com/2019/GPG-PUB-KEY-INTEL-PSXE-RUNTIME-2019 
+cd
+sudo apt-key add lic_rt/GPG-PUB-KEY-INTEL-PSXE-RUNTIME-2019 
+cd /etc/apt/sources.list.d
+sudo touch intel-psxe-runtime-2019.list
+sudo sh -c 'echo deb https://apt.repos.intel.com/2019 intel-psxe-runtime main > /etc/apt/sources.list.d/intel-psxe-runtime-2019.list'
+echo "deb https://apt.repos.intel.com/2019 intel-psxe-runtime main" | sudo tee -a /etc/apt/intel-psxe-runtime-2019.list
+sudo apt-get update
+sudo apt-get install intel-psxe-runtime=2019.3-199
+
+
+
+
+
